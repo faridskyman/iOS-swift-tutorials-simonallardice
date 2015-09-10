@@ -67,15 +67,34 @@ class ViewController: UIViewController, UITableViewDataSource {
         //var cell = UITableViewCell()
         
         var cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath) as UITableViewCell
+
+        //image setup
+        var starImage = UIImage(named: "starIcon")
+        var toolImage = UIImage(named: "toolsIcon")
         
         if indexPath.section == 0 {
-            let (LMSModule, Descriptin) = LMSAppMenu[indexPath.row]
+            let (LMSModule, AppDesc) = LMSAppMenu[indexPath.row]
             cell.textLabel?.text = LMSModule
+            cell.detailTextLabel?.text = AppDesc
+            cell.imageView?.image = starImage
+
         } else {
-            let (LMSModule, Descriptin) = LMSToolsMenu[indexPath.row]
+            let (LMSModule, AppDesc) = LMSToolsMenu[indexPath.row]
             cell.textLabel?.text = LMSModule
+            cell.detailTextLabel?.text = AppDesc
+            cell.imageView?.image = toolImage
         }
+        
+        
         return cell
+    }
+    
+    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if section == 0 {
+            return "Main LMS Modules"
+        } else {
+            return "LMS Tools"
+        }
     }
     
     
