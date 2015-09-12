@@ -10,9 +10,13 @@ import UIKit
 
 class InfoViewController: UIViewController {
     
+    var currentphoto : Photo?
+    
     @IBOutlet weak var InfoLabel: UILabel!
+    
 
     @IBAction func btnOK(sender: AnyObject) {
+        self.dismissViewControllerAnimated(true, completion: nil)
     }
     
     
@@ -20,6 +24,7 @@ class InfoViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        self.InfoLabel.text = currentphoto!.notes
     }
 
     override func didReceiveMemoryWarning() {

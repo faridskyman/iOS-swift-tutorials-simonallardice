@@ -18,6 +18,10 @@ class DisplayViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        //load image
+        
+        var image = UIImage(named: currentPhoto!.filename)
+        currentImage.image = image
     }
 
     override func didReceiveMemoryWarning() {
@@ -26,14 +30,18 @@ class DisplayViewController: UIViewController {
     }
     
 
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // Get the new view controller using segue.destinationViewController.
+        var thirdScene = segue.destinationViewController as InfoViewController
+        
         // Pass the selected object to the new view controller.
+        //thirdScene.InfoLabel.text = currentPhoto?.notes
+        thirdScene.currentphoto = currentPhoto
     }
-    */
+    
 
 }
