@@ -1,30 +1,26 @@
 //
-//  DisplayViewController.swift
-//  PhotoViewer
+//  TutorialsViewController.swift
+//  ModalPopupDemo
 //
-//  Created by farid on 12/9/15.
+//  Created by farid on 13/9/15.
 //  Copyright (c) 2015 farid. All rights reserved.
 //
 
 import UIKit
 
-class DisplayViewController: UIViewController {
-    
-    var currentPhoto: Photo?
+class TutorialsViewController: UIViewController {
 
-    @IBOutlet weak var currentImage: UIImageView!
+  
+
+    
+    @IBAction func btn_dismiss_win(sender: AnyObject) {
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        //load image
-        
-        var image = UIImage(named: currentPhoto!.filename)
-        currentImage.image = image
-        
-        //display title
-        self.title = currentPhoto!.name
     }
 
     override func didReceiveMemoryWarning() {
@@ -33,18 +29,14 @@ class DisplayViewController: UIViewController {
     }
     
 
-    
+    /*
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // Get the new view controller using segue.destinationViewController.
-        var thirdScene = segue.destinationViewController as InfoViewController
-        
         // Pass the selected object to the new view controller.
-        //thirdScene.InfoLabel.text = currentPhoto?.notes
-        thirdScene.currentphoto = currentPhoto
     }
-    
+    */
 
 }
