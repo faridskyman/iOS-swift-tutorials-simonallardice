@@ -29,11 +29,17 @@ class MasterViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //load data from persisant str
+        load()
+        
         // Do any additional setup after loading the view, typically from a nib.
         self.navigationItem.leftBarButtonItem = self.editButtonItem()
 
         let addButton = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: "insertNewObject:")
         self.navigationItem.rightBarButtonItem = addButton
+        
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -45,7 +51,11 @@ class MasterViewController: UITableViewController {
         objects.insert(BLANK_NOTE, atIndex: 0)
         let indexPath = NSIndexPath(forRow: 0, inSection: 0)
         self.tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
+        
+        save()
     }
+    
+    
 
     // MARK: - Segues
 
@@ -53,10 +63,17 @@ class MasterViewController: UITableViewController {
         if segue.identifier == "showDetail" {
             if let indexPath = self.tableView.indexPathForSelectedRow() {
                 let object = objects[indexPath.row] as String
-            (segue.destinationViewController as DetailViewController).detailItem = object
+                currentIndex = indexPath.row
+                
+                // below dvc has ? as if its null anyhing after it will not be executed
+                detailViewController?.detailItem = object
+            //(segue.destinationViewController as DetailViewController).detailItem = object
             }
         }
     }
+    
+    
+    
 
     // MARK: - Table View
 
@@ -87,6 +104,20 @@ class MasterViewController: UITableViewController {
             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
         } else if editingStyle == .Insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
+        }
+    }
+    
+    func save() {
+        //saves data based on key
+        NSUserDefaults.standardUserDefaults().setObject(objects, forKey: kNotes)
+        //saves to storage
+        NSUserDefaults.standardUserDefaults().synchronize()
+        
+    }
+    
+    func load() {
+        if let loadedData = NSUserDefaults.standardUserDefaults().arrayForKey(kNotes) as? [String] {
+            objects = loadedData
         }
     }
 
