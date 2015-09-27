@@ -30,6 +30,7 @@ class MasterViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        masterView = self
         //load data from persisant str
         load()
         
@@ -47,10 +48,19 @@ class MasterViewController: UITableViewController {
         // Dispose of any resources that can be recreated.
     }
 
+    
+    
+    // when '+' is pressed this method is called
     func insertNewObject(sender: AnyObject) {
+        
+        // when we create new object its added at top, index 0
         objects.insert(BLANK_NOTE, atIndex: 0)
         let indexPath = NSIndexPath(forRow: 0, inSection: 0)
         self.tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
+        
+        //set our currindex to 0 too
+        currentIndex = 0
+        self.performSegueWithIdentifier("showDetail", sender: self)
         
         save()
     }

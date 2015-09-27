@@ -43,7 +43,7 @@ class DetailViewController: UIViewController {
         detailViewController = self
         
         //show the keyboard
-        detailViewController?.becomeFirstResponder()
+        detailDescriptionLabel.becomeFirstResponder()
         
         self.configureView()
     }
@@ -53,6 +53,33 @@ class DetailViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
+    
+    //call the save when user click back to master view
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        //if object is empty just return
+        if objects.count == 0 {
+            return
+        }
+        
+        if detailDescriptionLabel.text == "" {
+            objects[currentIndex] = BLANK_NOTE
+        }
+        else {
+            objects[currentIndex] = detailDescriptionLabel.text
+        }
+        saveAndUpdate()
+    }
+    
+    
+    func saveAndUpdate() {
+        //call the same method in master view page
+        masterView?.save()
+        //update the table
+        masterView?.tableView.reloadData()
+        
+    }
 
 }
 
